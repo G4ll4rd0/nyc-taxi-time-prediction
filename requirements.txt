@@ -1,0 +1,6 @@
+mlflow==2.16.1
+dagshub==0.3.35
+jupyter==1.1.1
+xgboost==2.1.1
+hyperopt==0.2.7
+setuptools==75.1.0
