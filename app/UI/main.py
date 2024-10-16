@@ -1,9 +1,7 @@
+'''UI Module'''
 import json
 import requests
 import streamlit as st
-import pandas as pd
-from sklearn import datasets
-from sklearn.ensemble import RandomForestClassifier
 
 st.write("""
 # Application to predict the time for the NYC taxi trips
@@ -28,7 +26,7 @@ st.subheader('User Input parameters')
 st.write(df)
 
 if st.button('Predict'):
-    response = requests.post(url = 'http://127.0.0.1:8000/predict',
+    response = requests.post(url = 'http://127.0.0.1:5000/predict',
               data = json.dumps(df))
     x = type(response.text)
     st.write(x)
