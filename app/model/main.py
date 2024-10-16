@@ -6,7 +6,6 @@ from dataclasses import dataclass
 
 import dagshub
 import mlflow
-import uvicorn
 from fastapi import FastAPI
 from mlflow import MlflowClient
 from pydantic import BaseModel
