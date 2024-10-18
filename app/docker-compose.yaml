@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  # Servicio de frontend
+  ui:
+    container_name: "nyc-taxi-ui-container"
+    build:
+      context: ./UI # Define el contexto de construcción del frontend
+    ports:
+      - "8501:8501" # Mapea el puerto 8501 del contenedor al puerto 8501 del host
+    depends_on:
+      - model # Asegura que el backend este listo antes de levantar el frontend
+  
+  # Backend
+  model:
+    container_name: "nyc-taxi-model-container"
+    build:
+      context: ./model # Define el contexto de construcción del backend
+    ports:
+      - "8000:8000" # Mapea el puerto 8000 del contenedor al puerto 8000 del host
