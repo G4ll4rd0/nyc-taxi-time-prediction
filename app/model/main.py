@@ -4,36 +4,36 @@ Main App File
 import pickle
 from dataclasses import dataclass
 
-import dagshub
 import mlflow
 from fastapi import FastAPI
 from mlflow import MlflowClient
 from pydantic import BaseModel
 
 ##### MLflow settings #####
-DAGSHUB_REPO = "https://dagshub.com/G4ll4rd0/nyc-taxi-time-prediction"
+# DAGSHUB_REPO = "https://dagshub.com/G4ll4rd0/nyc-taxi-time-prediction"
 
-dagshub.init(url=DAGSHUB_REPO, mlflow=True) # type: ignore
+# dagshub.init(url=DAGSHUB_REPO, mlflow=True) # type: ignore
 
-MLFLOW_TRACKING_URI = mlflow.get_tracking_uri()
+# MLFLOW_TRACKING_URI = mlflow.get_tracking_uri()
+MLFLOW_TRACKING_URI = 'https://dagshub.com/G4ll4rd0/nyc-taxi-time-prediction.mlflow'
 
 mlflow.set_tracking_uri(uri=MLFLOW_TRACKING_URI)
 client = MlflowClient(tracking_uri=MLFLOW_TRACKING_URI)
 
-run_ = mlflow.search_runs(order_by=['metrics.rmse ASC'],
-                          output_format="list",
-                          experiment_names=["nyc-taxi-experiment-prefect"]
-                          )[0]
-run_id = run_.info.run_id
-run_id = '51fdab30ac6d4e9297625835169f2004'
+# run_ = mlflow.search_runs(order_by=['metrics.rmse ASC'],
+#                           output_format="list",
+#                           experiment_names=["nyc-taxi-experiment-prefect"]
+#                           )[0]
+# run_id = run_.info.run_id
+# RUN_ID = '51fdab30ac6d4e9297625835169f2004'
 
-run_uri = f"runs:/{run_id}/preprocessor"
+# run_uri = f"runs:/{RUN_ID}/preprocessor"
 
-client.download_artifacts(
-    run_id=run_id,
-    path='preprocessor',
-    dst_path='.'
-)
+# client.download_artifacts(
+#     run_id=run_id,
+#     path='preprocessor',
+#     dst_path='.'
+# )
 
 with open("preprocessor/preprocessor.b", "rb") as f_in:
     dv = pickle.load(f_in)

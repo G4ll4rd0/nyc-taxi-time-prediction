@@ -26,7 +26,8 @@ st.subheader('User Input parameters')
 st.write(df)
 
 if st.button('Predict'):
-    response = requests.post(url = 'http://127.0.0.1:5000/predict',
-              data = json.dumps(df))
+    response = requests.post(url = 'http://nyc-taxi-model-container:8000/predict',
+              data = json.dumps(df),
+              timeout=100)
     x = type(response.text)
-    st.write(x)
+    st.write(f'El tiempo estimado de viaje es de {response.json()["prediction"]} minutos')
