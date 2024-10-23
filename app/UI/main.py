@@ -13,7 +13,7 @@ def user_input_features():
     with st.sidebar:
         pu = st.text_input('PU Location ID')
         do = st.text_input('DO Location ID')
-        td = st.number_input('Trip Distance', value=10, min_value=1, max_value=100)
+        td = st.number_input('Trip Distance', value=10.0, min_value=1.0, max_value=100.0)
 
     data = {'PULocationID': pu,
             'DOLocationID': do,
@@ -27,7 +27,7 @@ st.write(df)
 
 if st.button('Predict'):
     response = requests.post(url = 'http://nyc-taxi-model-container:8000/predict',
-              data = json.dumps(df),
-              timeout=100)
+                             data = json.dumps(df),
+                             timeout=100)
     x = type(response.text)
     st.write(f'El tiempo estimado de viaje es de {response.json()["prediction"]} minutos')
